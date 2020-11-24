@@ -19,7 +19,7 @@ class PriorityQueue {
                 node->right = nullptr;
                 node->left = nullptr;
                 node->parent = nullptr;
-            } else if (node->priority <= priority) {
+            } else if (node->priority >= priority) {
                 node->right = insert(node->right, data, priority);
                 node->right->parent = node;
             } else {
