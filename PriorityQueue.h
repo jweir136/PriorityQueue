@@ -2,6 +2,7 @@
 #define PRIORITY_QUEUE_H
 
 #include <iostream>
+#include <stdexcept>      // std::length_error
 
 using namespace std;
 
@@ -44,6 +45,11 @@ class PriorityQueue {
         }
 
         T pop() { // TODO: Take into account if the queue is empty.
+            if (this->size == 0)
+                throw length_error("Error: Queue cannot be empty.");
+
+            this->size--;
+
             Node *max = this->root;
             Node *node;
 
