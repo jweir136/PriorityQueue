@@ -8,43 +8,47 @@ using namespace std;
 template <class T>
 class PriorityQueue {
     private:
+        struct Node {
+            T data;
+            int priority;
+            Node *next;
+        };
         size_t size;
-        struct Node { T data; int priority; Node *right; Node *left; Node *parent; };
-
-        Node *insert(Node *node, T data, int priority) {
-            if (node == nullptr) {
-                node = new Node();
-                node->data = data;
-                node->priority = priority;
-                node->right = nullptr;
-                node->left = nullptr;
-                node->parent = nullptr;
-            } else if (node->priority >= priority) {
-                node->right = insert(node->right, data, priority);
-                node->right->parent = node;
-            } else {
-                node->left = insert(node->left, data, priority);
-                node->left->parent = node;
-            }
-
-            return node;
-        }
-    
-    public:
         Node *root;
 
+    public:
         PriorityQueue() {
             this->size = 0;
             this->root = nullptr;
         }
 
-        size_t getSize() {
-            return this->size;
+        void insert(T data, int priority) {
+            Node *node = new Node;
+            node->data = data;
+            node->priority = priority;
+            node->next = this->root;
+            this->root = node;
         }
 
-        void insert(T data,  int priority) {
-            this->root = insert(this->root, data, priority);
-            this->size++;
+        void display() {
+            for (Node *node = this->root; node != nullptr; node = node->next)
+                cout << "{ " << node << " " << node->data << " }\t";
+            cout << endl;
+        }
+
+        T pop() {
+            Node *max = this->root;
+            Node *node;
+
+            for (node = this->root; node != nullptr; node = node->next)
+                if (max->priority < node->priority)
+                    max = node;
+
+            for (node = this->root; node->next != max; node = node->next);
+
+            node->next = max->next;
+
+            return max->data;
         }
 };
 
