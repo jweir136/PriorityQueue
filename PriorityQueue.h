@@ -2,7 +2,7 @@
 #define PRIORITY_QUEUE_H
 
 #include <iostream>
-#include <stdexcept>      // std::length_error
+#include <stdexcept>
 
 using namespace std;
 
@@ -19,11 +19,22 @@ class PriorityQueue {
         Node *root;
 
     public:
+	/*********************************************************************
+	*  Create a new instance of the PriorityQueue class by settings	     *
+	*  the intialial size of the queue to 0 and setting the root node    *
+	*  to empty.							     *
+        *********************************************************************/
         PriorityQueue() {
             this->size = 0;
             this->root = nullptr;
         }
 
+	/********************************************************************
+	*  Insert a new data into the queue by simply setting it equal to   *
+	*  the root. The data is NOT ordered by its priority score, however *
+	*  the data will always be extracted according to their priority    *
+	*  score.							    *
+	*******************************************************************/
         void insert(T data, int priority) {
             Node *node = new Node;
             node->data = data;
@@ -38,13 +49,27 @@ class PriorityQueue {
             this->size++;
         }
 
+	/*******************************************************************
+	*  Output a limited view of the queue to the screen. This method   *
+	*  is for debugging purposes only.				   *
+	*******************************************************************/
         void display() {
             for (Node *node = this->root; node != nullptr; node = node->next)
                 cout << "{ " << node->last << " " << node << " " << node->next  << " }\t";
             cout << endl;
         }
 
-        T pop() { // TODO: Take into account if the queue is empty.
+	/********************************************************************
+	*  Return and remove the element in the queue with the highest      *
+	*  priority score. 						    *
+	*								    *
+	*  Items with the same priority score may not be extracted in any   *
+	*  particular order.						    *
+	*								    *
+	*  Attempting to pop an item from an empty queue will result in a   *
+	*  length_error being thrown.					    *
+	********************************************************************/
+        T pop() {
             if (this->size == 0)
                 throw length_error("Error: Queue cannot be empty.");
 
