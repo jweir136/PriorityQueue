@@ -12,6 +12,7 @@ class PriorityQueue {
             T data;
             int priority;
             Node *next;
+            Node *last;
         };
         size_t size;
         Node *root;
@@ -27,16 +28,22 @@ class PriorityQueue {
             node->data = data;
             node->priority = priority;
             node->next = this->root;
+            node->last = nullptr;
             this->root = node;
+
+            if (this->root->next != nullptr)
+                this->root->next->last = this->root;
+
+            this->size++;
         }
 
         void display() {
             for (Node *node = this->root; node != nullptr; node = node->next)
-                cout << "{ " << node << " " << node->data << " }\t";
+                cout << "{ " << node->last << " " << node << " " << node->next  << " }\t";
             cout << endl;
         }
 
-        T pop() {
+        T pop() { // TODO: Take into account if the queue is empty.
             Node *max = this->root;
             Node *node;
 
@@ -44,9 +51,15 @@ class PriorityQueue {
                 if (max->priority < node->priority)
                     max = node;
 
-            for (node = this->root; node->next != max; node = node->next);
-
-            node->next = max->next;
+            if (max == this->root) {
+                this->root = this->root->next;
+                if (this->root != nullptr) {
+                    this->root->last = nullptr;
+                }
+            } else {
+                max->last->next = max->next;
+                max->next->last = max->last;
+            }
 
             return max->data;
         }
