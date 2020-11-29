@@ -17,3 +17,5 @@ the elements are returned the one with the highest priority is given. Elements w
 In order to add the *priority queue* class to your project, instruct the linker to add the ```PriorityQueue.h``` source files.
 
     #include "PriorityQueue.h"
+
+To create an instance of the object, simply initialize it as you would any generic class in c++17. The constructor does not take any arguments.
