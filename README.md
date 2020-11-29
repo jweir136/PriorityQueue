@@ -39,3 +39,22 @@ less urgent ones. Please note that elements are not stored in any particular ord
     queue.insert(1, 1);
     queue.insert(2, 0);
     queue.insert(3, -1); // negative priority scores are allowed
+    
+## *pop* method
+
+    T pop();
+    
+The *pop* method is used to return the next element in the priority queue. The next element is the element with the highest priority score in the queue.
+In the likely event that the there is a tie in the highest priority score, the next element is not always the most recently added element. A ```length_error``` is raised
+when *pop* is called and the queue is empty (this is considered a runtime error, not a compile-time error).
+
+    cout << queue.pop() << endl;
+
+## *getSize* method
+
+    size_t getSize();
+    
+The *getSize* method simply just returns the number of elements in the queue. This method is useful for avoiding the above-mentioned ```length_error```.
+
+    cout << "There are " << queue.getSize() << " elements in the queue." << endl;
+   
