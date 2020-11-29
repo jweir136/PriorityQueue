@@ -12,6 +12,9 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Priority_queue),
 This particular implementation makes use of a *doubly-linked list* in order to store all the elements. The elements are not stored in any particular order, however when
 the elements are returned the one with the highest priority is given. Elements with the same priority score are not garenteed to be returned in any particular order.
 
+Since the source code of the *PriorityQueue* is generic it can be used for a wide array of examples. However to showcase the usage and abilities of the object, I implemented
+an example that uses an emergency room to show the usefulness of the priority queue. In an emergency room many different patients will be coming in, all with various injuries ranging in severity. Naturally, those with the most urgent of injuries should be treated first, making this example prefect for using a priority queue. The queue is used to store all the different patients that are waiting for treatment. When a patient is returned from the queue, the one with the most urgent injuries is given first.
+
 ## Usage
 
 In order to add the *priority queue* class to your project, instruct the linker to add the ```PriorityQueue.h``` source files.
