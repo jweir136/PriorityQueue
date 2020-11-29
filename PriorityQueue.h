@@ -49,16 +49,6 @@ class PriorityQueue {
             this->size++;
         }
 
-	/*******************************************************************
-	*  Output a limited view of the queue to the screen. This method   *
-	*  is for debugging purposes only.				   *
-	*******************************************************************/
-        void display() {
-            for (Node *node = this->root; node != nullptr; node = node->next)
-                cout << "{ " << node->last << " " << node << " " << node->next  << " }\t";
-            cout << endl;
-        }
-
 	/********************************************************************
 	*  Return and remove the element in the queue with the highest      *
 	*  priority score. 						    *
